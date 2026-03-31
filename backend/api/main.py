@@ -1,10 +1,20 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import Response
+from fastapi.middleware.cors import CORSMiddleware
 from rembg import remove
 from PIL import Image
 import io
 
 app = FastAPI()
+
+# Enable CORS for frontend requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/health")
 def health():
